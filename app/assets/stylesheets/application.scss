@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "AdminLTE/AdminLTE";
+@import "AdminLTE/skins/skin-blue";
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+  height: auto;
+}

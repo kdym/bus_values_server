@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+  profile: "Profile"
+  logout: "Logout"
+  menu: "Menu"
+  kdym: "Kdym Soluções em Tecnologia"
+  version: "Version %{version}"
+  dashboard: "Dashboard"
+  confirm_logout: "Are you sure?"
