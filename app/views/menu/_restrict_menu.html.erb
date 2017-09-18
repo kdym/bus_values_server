@@ -8,3 +8,14 @@
 <li class="<%= active_class %>">
   <a href="<%= root_path %>"><i class='fa fa-tachometer'></i> <span><%= t('dashboard') %></span></a>
 </li>
+
+<%
+  active_class = ''
+  if controller_name == 'vehicles'
+    active_class = 'active'
+  end
+%>
+
+<li class="<%= active_class %>">
+  <a href="<%= vehicles_path %>"><i class='fa fa-bus'></i> <span><%= Vehicle.model_name.human(count: 2) %></span></a>
+</li>

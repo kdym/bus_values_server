@@ -1,0 +1,10 @@
+en:
+  activerecord:
+   models:
+    vehicle:
+     one: 'Vehicle'
+     other: 'Vehicles'
+
+   attributes:
+     vehicle:
+      nome: 'Name'

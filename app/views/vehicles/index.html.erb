@@ -1,0 +1,39 @@
+<section class="content-header">
+  <h1><%= Vehicle.model_name.human(count: 2) %></h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-md-6">
+      <%= render 'form', vehicle: @vehicle %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="box">
+        <div class="box-body">
+          <table id="vehicles-list" class="table table-hover">
+            <thead>
+            <tr>
+              <th><%= Vehicle.human_attribute_name('nome') %></th>
+              <th><%= t('actions') %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @vehicles.each do |vehicle| %>
+                <tr>
+                  <td><%= vehicle.nome %></td>
+                  <td>
+                    <div class="actions-list">
+                      <%= link_to t('edit'), edit_vehicle_path(vehicle) %>
+                      <%= link_to t('delete'), vehicle, method: :delete, data: {confirm: t('confirm')} %>
+                    </div>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

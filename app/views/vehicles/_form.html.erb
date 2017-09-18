@@ -1,0 +1,24 @@
+<%= form_with(model: vehicle, local: true) do |form| %>
+    <% if vehicle.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
+
+          <ul>
+            <% vehicle.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="box">
+      <div class="box-body">
+        <div class="form-group">
+          <%= form.label :nome %>
+          <%= form.text_field :nome, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <%= form.button "<i class='fa fa-check'></i> #{t('save')}".html_safe, class: 'btn btn-success' %>
+<% end %>

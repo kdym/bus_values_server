@@ -17,7 +17,51 @@
 @import "bootstrap";
 @import "AdminLTE/AdminLTE";
 @import "AdminLTE/skins/skin-blue";
+@import "dataTables/jquery.dataTables";
+@import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
 
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
   height: auto;
+}
+
+.actions-bar {
+  margin: 10px 0;
+}
+
+#error_explanation {
+  color: $alert-danger-text;
+  background-color: $alert-danger-bg;
+  width: auto;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px;
+
+  h2 {
+    background: transparent;
+    color: $alert-danger-text;
+    font-weight: bolder;
+  }
+}
+
+.field_with_errors {
+  background-color: transparent;
+  display: block;
+  color: $alert-danger-text;
+
+  input {
+    border-color: $alert-danger-text;
+  }
+}
+
+table {
+  .actions-list {
+    a {
+      margin: 0 5px 0 0;
+    }
+  }
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0;
+  margin: 0;
 }
