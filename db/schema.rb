@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921122323) do
+ActiveRecord::Schema.define(version: 20170921133327) do
 
   create_table "days", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date "data"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20170921122323) do
     t.bigint "day_id"
     t.index ["day_id"], name: "index_days_vehicles_on_day_id"
     t.index ["vehicle_id"], name: "index_days_vehicles_on_vehicle_id"
+  end
+
+  create_table "prices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal "valor", precision: 10, scale: 2
+    t.string "categoria"
+    t.integer "horas"
+    t.bigint "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_prices_on_vehicle_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -48,4 +58,5 @@ ActiveRecord::Schema.define(version: 20170921122323) do
 
   add_foreign_key "days_vehicles", "days", on_delete: :cascade
   add_foreign_key "days_vehicles", "vehicles", on_delete: :cascade
+  add_foreign_key "prices", "vehicles"
 end

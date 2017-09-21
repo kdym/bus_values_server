@@ -25,6 +25,7 @@
                   <td>
                     <div class="actions-list">
                       <%= link_to t('edit'), edit_vehicle_path(vehicle) %>
+                      <%= link_to Price.model_name.human(count: 2), prices_path(vehicle) %>
                       <%= link_to t('delete'), vehicle, method: :delete, data: {confirm: t('confirm')} %>
                     </div>
                   </td>

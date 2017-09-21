@@ -58,3 +58,7 @@ en:
   to: "to"
   date_format: "%m/%d/%Y"
   date_month_format: "%b/%d"
+  currency:
+    symbol: '$'
+    thousands: ','
+    decimal: '.'

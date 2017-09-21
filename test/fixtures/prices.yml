@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor: 9.99
+  categoria: MyString
+  horas: 1
+  vehicle: one
+
+two:
+  valor: 9.99
+  categoria: MyString
+  horas: 1
+  vehicle: two

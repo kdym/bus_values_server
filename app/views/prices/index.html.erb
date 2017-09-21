@@ -1,0 +1,46 @@
+<section class="content-header">
+  <h1><%= Price.model_name.human(count: 2) %>
+    <small><%= @vehicle.nome %></small>
+  </h1>
+</section>
+
+<section class="content">
+  <nav class="actions-bar">
+    <%= link_to "<i class='fa fa-pencil'></i> #{t('edit')}".html_safe, prices_edit_path(@vehicle), class: 'btn btn-app' %>
+  </nav>
+
+  <div class="box">
+    <div class="box-body">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th></th>
+
+          <% Day.categories.each do |key, c| %>
+              <th><%= c %></th>
+          <% end %>
+        </tr>
+        </thead>
+        <tbody>
+        <% (Price::MIN_HOURS..Price::MAX_HOURS).each do |h| %>
+            <tr>
+              <th><%= t('activerecord.attributes.price.horas', count: h) %></th>
+
+              <% Day.categories.each do |key, c| %>
+                  <td>
+                    <%
+                      if @prices[h]
+                        if @prices[h][key]
+                          concat @prices[h][key]
+                        end
+                      end
+                    %>
+                  </td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

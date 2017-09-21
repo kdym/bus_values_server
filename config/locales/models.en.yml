@@ -10,6 +10,9 @@ en:
       day:
         one: 'Day'
         other: 'Days'
+      price:
+        one: 'Price'
+        other: 'Prices'
 
     attributes:
       vehicle:
@@ -19,3 +22,7 @@ en:
         categoria: 'Category'
         vehicles: 'Vehicles'
         data: 'Date'
+      price:
+        horas:
+          one: '1 hour'
+          other: '%{count} hours'

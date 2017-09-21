@@ -18,5 +18,7 @@
 // require turbolinks
 //= require bootstrap-datepicker
 //= require jquery.validate
+//= require maskmoney
+//= require initializers/masked.inputs
 //= require app
 //= require_tree .

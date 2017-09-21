@@ -1,0 +1,47 @@
+<section class="content-header">
+  <h1><%= Price.model_name.human(count: 2) %>
+    <small><%= @vehicle.nome %></small>
+  </h1>
+</section>
+
+<section class="content">
+  <%= form_with url: prices_path(@vehicle), local: true do |f| %>
+
+      <div class="box">
+        <div class="box-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th></th>
+
+              <% Day.categories.each do |key, c| %>
+                  <th><%= c %></th>
+              <% end %>
+            </tr>
+            </thead>
+            <tbody>
+            <% (Price::MIN_HOURS..Price::MAX_HOURS).each do |h| %>
+                <tr>
+                  <th><%= t('activerecord.attributes.price.horas', count: h) %></th>
+
+                  <% Day.categories.each do |key, c| %>
+                      <%
+                        if @prices[h]
+                          if @prices[h][key]
+                            value = @prices[h][key]
+                          end
+                        end
+                      %>
+
+                      <td><%= text_field_tag "values[#{h}][#{key}]", value, class: 'form-control mask-money' %></td>
+                  <% end %>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <%= f.button "<i class='fa fa-check'></i> #{t('save')}".html_safe, class: 'btn btn-success' %>
+  <% end %>
+</section>
