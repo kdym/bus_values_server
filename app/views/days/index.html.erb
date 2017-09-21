@@ -1,0 +1,39 @@
+<section class="content-header">
+  <h1><%= Day.model_name.human(count: 2) %></h1>
+</section>
+
+<section class="content">
+  <nav class="actions-bar">
+    <%= link_to "<i class='fa fa-plus'></i> #{t('new')}".html_safe, new_day_path, class: 'btn btn-app' %>
+  </nav>
+
+  <div class="box">
+    <div class="box-body">
+      <table class="table table-hover" id="days-list">
+        <thead>
+        <tr>
+          <th><%= Day.human_attribute_name('data') %></th>
+          <th><%= Day.human_attribute_name('categoria') %></th>
+          <th><%= Day.human_attribute_name('vehicles') %></th>
+          <th><%= t('actions') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @days.each do |d| %>
+            <tr>
+              <td><%= d.data %></td>
+              <td><%= d.categoria %></td>
+              <td><%= get_vehicles_in_date(d).join(', ') %></td>
+              <td>
+                <div class="actions-list">
+                  <%= link_to t('edit'), edit_day_path(d) %>
+                  <%= link_to t('delete'), d, method: :delete, data: {confirm: t('confirm')} %>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

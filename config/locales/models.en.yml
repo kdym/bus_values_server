@@ -1,10 +1,21 @@
 en:
   activerecord:
-   models:
-    vehicle:
-     one: 'Vehicle'
-     other: 'Vehicles'
+    errors:
+      period_required: 'Period is required'
+      invalid_period: 'Invalid Period'
+    models:
+      vehicle:
+        one: 'Vehicle'
+        other: 'Vehicles'
+      day:
+        one: 'Day'
+        other: 'Days'
 
-   attributes:
-     vehicle:
-      nome: 'Name'
+    attributes:
+      vehicle:
+        nome: 'Name'
+      day:
+        period: 'Period'
+        categoria: 'Category'
+        vehicles: 'Vehicles'
+        data: 'Date'

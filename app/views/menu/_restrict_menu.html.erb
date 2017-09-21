@@ -19,3 +19,14 @@
 <li class="<%= active_class %>">
   <a href="<%= vehicles_path %>"><i class='fa fa-bus'></i> <span><%= Vehicle.model_name.human(count: 2) %></span></a>
 </li>
+
+<%
+  active_class = ''
+  if controller_name == 'days'
+    active_class = 'active'
+  end
+%>
+
+<li class="<%= active_class %>">
+  <a href="<%= days_path %>"><i class='fa fa-calendar'></i> <span><%= Day.model_name.human(count: 2) %></span></a>
+</li>

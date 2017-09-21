@@ -1,0 +1,50 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+$('.input-daterange input').each ->
+  $(this).datepicker('clearDates')
+
+$('#day-date').datepicker()
+
+$('#select-all-vehicles-checkbox').click ->
+  $('.vehicle-checkbox').prop 'checked', $(this).prop('checked')
+
+$.validator.addMethod 'hasPeriod', ((value, element) ->
+  $('#day-start-date').val() != '' && $('#day-end-date').val() != ''
+), '<%= I18n.t('activerecord.errors.period_required') %>'
+
+$.validator.addMethod 'validPeriod', ((value, element) ->
+  if $('#day-start-date').val() != '' && $('#day-end-date').val() != ''
+    return Date.parse($('#day-start-date').val()) <= Date.parse($('#day-end-date').val())
+), '<%= I18n.t('activerecord.errors.invalid_period') %>'
+
+$('#days-form').validate {
+  rules: {
+    'day[start_date]': {
+      'hasPeriod'
+      'validPeriod'
+    }
+    'day[categoria]': 'required'
+    'day[vehicles]': 'required'
+    'day[data]': 'required'
+  }
+  errorPlacement: (error, element) ->
+    switch element.attr('name')
+      when 'day[start_date]'
+        error.appendTo '#period-error-label'
+      when 'day[categoria]'
+        error.appendTo '#category-error-label'
+      when 'day[vehicles]'
+        error.appendTo '#vehicles-error-label'
+}
+
+$('#days-list').DataTable
+  order: [[
+    0
+    'desc'
+  ]]
+  columnDefs: [{
+    orderable: false
+    targets: [3]
+  }]
