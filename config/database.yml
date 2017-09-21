@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: BusValues_production
-  username: BusValues
-  password: <%= ENV['BUSVALUES_DATABASE_PASSWORD'] %>
+  database: kdyms407_busvalues
+  username: kdyms407_skn
+  password: "@kdym#"
+  host: kdymsolucoes.com.br
