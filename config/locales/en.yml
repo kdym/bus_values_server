@@ -62,3 +62,6 @@ en:
     symbol: '$'
     thousands: ','
     decimal: '.'
+  calendar: "Calendar"
+  calculate: "Calculate Prices"
+  moment_date_format: "MM-DD-YYYY"

@@ -1,3 +1,28 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#prices-details {
+  width: 100%;
+
+  td {
+    font-size: large;
+    padding: 5px;
+  }
+}
+
+#total-price-container {
+  h1 {
+    font-size: medium;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  h2 {
+    text-align: center;
+    color: $alert-success-text;
+  }
+}

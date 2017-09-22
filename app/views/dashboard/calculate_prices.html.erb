@@ -1,0 +1,9 @@
+<table id="prices-details">
+  <% @prices.each do |p| %>
+      <tr class="<%= get_prices_details_class_flags p[:date], p[:category] %>">
+        <td><%= p[:date].strftime t('date_month_format') %></td>
+        <td class="to-center"><%= p[:category] %></td>
+        <td class="to-right prices-details-value"><%= p[:price] %></td>
+      </tr>
+  <% end %>
+</table>

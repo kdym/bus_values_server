@@ -57,5 +57,7 @@ gem 'jquery-datatables-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-validation-rails'
 gem 'maskmoney-rails'
+gem 'fittextjs_rails'
+gem 'momentjs-rails'
 
 ruby '2.3.3'

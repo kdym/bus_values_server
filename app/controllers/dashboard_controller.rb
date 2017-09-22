@@ -1,15 +1,19 @@
 class DashboardController < ApplicationController
   def index
-    @start_date = Date.today
+    @vehicles = Vehicle.all.order(nome: :asc)
+  end
 
-    if params[:start_date]
-      @start_date = params[:start_date].to_date
-    end
+  def calculate_prices
+    vehicle = Vehicle.find(params[:vehicle])
+    @prices = PricesController.calculate_prices params[:start_date], params[:end_date], vehicle, params[:hours]
 
-    if params[:date]
-      @start_date = params[:date].to_date
-    end
+    render layout: false
+  end
 
+  def load_dates
+    @vehicles = Vehicle.all.order(nome: :asc)
+
+    @start_date = params[:start_date].to_date
     @end_date = @start_date + 7.days
 
     @vehicles = Vehicle.all
@@ -22,5 +26,7 @@ class DashboardController < ApplicationController
         @days_categories[v.id][date] = DaysController.get_day_category date, v
       end
     end
+
+    render layout: false
   end
 end

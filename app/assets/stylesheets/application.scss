@@ -71,8 +71,12 @@ table {
   text-align: right;
 }
 
+.to-center {
+  text-align: center;
+}
+
 form {
-  input, input[type='radio'] {
+  input, select {
     &.error {
       border-color: $alert-danger-text;
     }

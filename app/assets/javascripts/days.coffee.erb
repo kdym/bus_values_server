@@ -16,7 +16,7 @@ $.validator.addMethod 'hasPeriod', ((value, element) ->
 
 $.validator.addMethod 'validPeriod', ((value, element) ->
   if $('#day-start-date').val() != '' && $('#day-end-date').val() != ''
-    return Date.parse($('#day-start-date').val()) <= Date.parse($('#day-end-date').val())
+    return moment($('#day-start-date').val(), '<%= I18n.t('moment_date_format') %>') <= moment($('#day-end-date').val(), '<%= I18n.t('moment_date_format') %>')
 ), '<%= I18n.t('activerecord.errors.invalid_period') %>'
 
 $('#days-form').validate {

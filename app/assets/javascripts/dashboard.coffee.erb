@@ -1,0 +1,100 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+$('.input-daterange input').each ->
+  $(this).datepicker('clearDates')
+
+if $('#total-price-container').length
+  $('#total-price-container h2').fitText 0.5
+
+$.validator.addMethod 'hasPeriodDashboard', ((value, element) ->
+  $('#start-date').val() != '' && $('#end-date').val() != ''
+), '<%= I18n.t('activerecord.errors.period_required') %>'
+
+$.validator.addMethod 'validPeriodDashboard', ((value, element) ->
+  if $('#start-date').val() != '' && $('#end-date').val() != ''
+    return moment($('#start-date').val(), '<%= I18n.t('moment_date_format') %>') <= moment($('#end-date').val(), '<%= I18n.t('moment_date_format') %>')
+), '<%= I18n.t('activerecord.errors.invalid_period') %>'
+
+$('#calculate-form').validate {
+  rules: {
+    'start_date': {
+      'hasPeriodDashboard'
+      'validPeriodDashboard'
+    },
+    'vehicle': 'required'
+    'hours': 'required'
+  }
+  errorPlacement: (error, element) ->
+    switch element.attr('name')
+      when 'start_date'
+        error.appendTo '#period-error-label'
+}
+
+$('#calculate-form').submit ->
+  if ($(this).valid())
+    setLoadingBox '#calculate-box'
+
+    $.ajax {
+      url: '<%= Rails.application.routes.url_helpers.dashboard_calculate_path %>'
+      type: 'post'
+      data: {
+        start_date: $('#start-date').val()
+        end_date: $('#end-date').val()
+        vehicle: $('#vehicle').val()
+        hours: $('#hours').val()
+      }
+      success: (data) ->
+        $('#prices-details-container').html(data)
+
+        sum = 0
+        $('.prices-details-value').each ->
+          sum += numeral($(this).html()).value()
+
+        $('#total-price-container h2').html numeral(sum).format('$0,0.00')
+
+        unsetLoadingBox '#calculate-box'
+    }
+
+  false
+
+loadDates = (date) ->
+  setLoadingBox '#calendar-box'
+
+  $.ajax {
+    url: '<%= Rails.application.routes.url_helpers.dashboard_dates_path %>'
+    data: {
+      start_date: date.format('YYYY-MM-DD')
+    }
+    success: (data) ->
+      $('#calendar-container').html(data)
+
+      $('#next-date').unbind 'click'
+      $('#next-date').click ->
+        nextDates date
+
+        false
+
+      $('#previous-date').unbind 'click'
+      $('#previous-date').click ->
+        previousDates date
+
+        false
+
+      unsetLoadingBox '#calendar-box'
+  }
+
+nextDates = (date) ->
+  loadDates moment(date).add(7, 'days')
+
+previousDates = (date) ->
+  loadDates moment(date).subtract(7, 'days')
+
+if $('#calendar-container').length
+  loadDates moment()
+
+$('#date-navigator-input').datepicker().on 'changeDate', (value) ->
+  $('#date-navigator-input').datepicker 'hide'
+
+  loadDates moment value.date.getFullYear() + '-' + (value.date.getMonth() + 1) + '-' + value.date.getDate()

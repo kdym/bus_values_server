@@ -81,6 +81,18 @@ class PricesController < ApplicationController
     end
   end
 
+  def self.calculate_prices start_date, end_date, vehicle, hours
+    start_date = Date.strptime start_date, I18n.t('date_format')
+    end_date = Date.strptime end_date, I18n.t('date_format')
+
+    (start_date..end_date).map do |date|
+      category = DaysController.get_day_category date, vehicle
+      price = Price.where(vehicle_id: vehicle.id, categoria: category, horas: hours).first
+
+      {date: date, category: category, price: (price) ? price.valor : 0}
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_price

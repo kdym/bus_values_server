@@ -20,5 +20,8 @@
 //= require jquery.validate
 //= require maskmoney
 //= require initializers/masked.inputs
+//= require fittext
+//= require moment
+//= require initializers/box-loading
 //= require app
 //= require_tree .
