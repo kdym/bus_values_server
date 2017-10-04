@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
 
   resources :days
+
+  get 'vehicles', to: 'vehicles#fetch', defaults: {format: 'json'}
   resources :vehicles
 
   devise_for :users

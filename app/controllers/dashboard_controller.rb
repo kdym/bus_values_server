@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:calculate_prices]
+  skip_before_action :verify_authenticity_token, only: [:calculate_prices]
+
   def index
     @vehicles = Vehicle.all.order(nome: :asc)
   end
@@ -7,7 +10,10 @@ class DashboardController < ApplicationController
     vehicle = Vehicle.find(params[:vehicle])
     @prices = PricesController.calculate_prices params[:start_date], params[:end_date], vehicle, params[:hours]
 
-    render layout: false
+    respond_to do |format|
+      format.html {render layout: false}
+      format.json {render json: @prices}
+    end
   end
 
   def load_dates

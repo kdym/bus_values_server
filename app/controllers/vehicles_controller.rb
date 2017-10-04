@@ -1,4 +1,5 @@
 class VehiclesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:fetch]
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
 
   # GET /vehicles
@@ -6,6 +7,12 @@ class VehiclesController < ApplicationController
   def index
     @vehicles = Vehicle.all
     @vehicle = Vehicle.new
+  end
+
+  def fetch
+    @vehicles = Vehicle.all
+
+    render json: @vehicles
   end
 
   # GET /vehicles/1

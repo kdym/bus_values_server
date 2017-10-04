@@ -3,7 +3,7 @@
       <tr class="<%= get_prices_details_class_flags p[:date], p[:category] %>">
         <td><%= p[:date].strftime t('date_month_format') %></td>
         <td class="to-center"><%= p[:category] %></td>
-        <td class="to-right prices-details-value"><%= p[:price] %></td>
+        <td class="to-right prices-details-value"><%= number_to_currency p[:price], precision: 2, unit: I18n.t('currency.symbol'), separator: I18n.t('currency.decimal'), delimiter: I18n.t('currency.thousands') %></td>
       </tr>
   <% end %>
 </table>
